@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import requests
 import pandas as pd
 import psycopg2
+import os
 
 default_args = {
     'owner': 'Ezra',
@@ -16,9 +17,15 @@ default_args = {
     'retry_delay': timedelta(minutes=2)
 }
 
+host=os.getenv("host")
+port=os.getenv("port")
+dbname=os.getenv("dbname")
+user=os.getenv("user")
+password=os.getenv("password")
+
 def fetch_weather_data(**kwargs):
     city_id = 184745
-    api_key = "83394daa751544e8876afc7951826d04"
+    api_key = os.getenv("api_key")
     url = f"https://api.openweathermap.org/data/2.5/weather?id={city_id}&appid={api_key}&units=metric"
 
     response = requests.get(url)
@@ -40,11 +47,11 @@ def store_weather_data(**kwargs):
     weather_info = kwargs['ti'].xcom_pull(task_ids='fetch_weather', key='weather_info')
 
     conn = psycopg2.connect(
-        host="128.85.32.87",
-        port="5432",
-        dbname="dataanalytics",
-        user="postgres",
-        password="12345"
+        host= host,
+        port=port,
+        dbname=dbname,
+        user=user,
+        password=password
     )
     cursor = conn.cursor()
 
