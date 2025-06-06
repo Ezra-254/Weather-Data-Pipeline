@@ -1,6 +1,16 @@
 # Weather-Data-Pipeline
 This project is an Apache Airflow DAG that automates fetching daily weather data for Nairobi (city ID: 184745) from the OpenWeatherMap API and storing it in a PostgreSQL database. The pipeline collects metrics like temperature, humidity, weather description, and wind speed, saving them with timestamps for data analysis.
 
+It solves the common challenge of continuously ingesting and organizing external weather data in a structured, queryable format — enabling data-driven decisions for sectors such as agriculture, logistics, and planning.
+
+# Objectives
+
+- Automate data ingestion from a weather API
+- Clean and transform the raw data
+- Store structured weather data in PostgreSQL
+- Schedule the pipeline to run reliably using Apache Airflow
+- Enable future analytics and dashboarding on historical weather trends
+
 # Tech Stack
 -Apache Airflow – Orchestrating the workflow
 -Python – Writing tasks
